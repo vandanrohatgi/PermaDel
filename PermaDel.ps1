@@ -18,15 +18,19 @@ Expand-Archive SDelete.zip -DestinationPath $pwd\sdelete
 rm SDelete.zip
 }
 
-write-host "Adding random data to file..."
-echo "csakhbcksjabkjsbckjwcjkebce13984732794y32udhew" >> $file
+# overwrite the metadata such as name, size, last modified etc.
 
-write-host "Renaming file..."
-$randomName= -join( (65..90)+(97..122) | Get-Random -Count 10 | % {[char]$_} )
-$path=Split-Path -Path $file
-Rename-Item -Path $file -NewName "$randomName.txt"
+write-host "Adding random data to file..."
+$randomData= -join( (65..90)+(97..122) | Get-Random -Count 100 | % {[char]$_} )
+echo $randomData >> $file
+
+# commenting this section since SDelete already renames the files 26 times before deleting
+#write-host "Renaming file..."
+#$randomName= -join( (65..90)+(97..122) | Get-Random -Count 10 | % {[char]$_} )
+#$path=Split-Path -Path $file
+#Rename-Item -Path $file -NewName "$randomName.txt"
 
 write-host "Deleting..."
-.\sdelete\sdelete.exe -nobanner -p 2 "$path$randomName.txt"
+.\sdelete\sdelete.exe -nobanner -p 2 $file
 
 write-host "Poof! and the file is forever lost..."
