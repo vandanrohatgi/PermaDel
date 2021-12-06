@@ -18,3 +18,5 @@ In this script I try to delete not only the content of the files but also overwr
 
 ./PermaDel.ps1 -h
 ```
+
+[code for random data was taken from here](https://devblogs.microsoft.com/scripting/generate-random-letters-with-powershell/)
